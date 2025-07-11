@@ -1,6 +1,49 @@
 
 -- an initial query that retrieves all bookings along with the user details, property details, and payment details.
 
+
+-- Unoptimized query retrieving all bookings with related details (no JOINs)
+
+EXPLAIN ANALYZE
+SELECT 
+    bookings.booking_id,
+    bookings.start_date,
+    bookings.end_date,
+    bookings.total_price,
+    bookings.booking_status,
+    bookings.created_at AS booking_created_at,
+    bookings.user_id,
+    bookings.property_id,
+    bookings.payment_id,
+
+    users.first_name,
+    users.last_name,
+    users.email,
+    users.password_hash,
+    users.phone_number,
+    users.role,
+
+    properties.host_id,
+    properties.name,
+    properties.description,
+    properties.location,
+    properties.price_per_night,
+
+    payments.amount,
+    payments.payment_date,
+    payments.payment_method
+FROM 
+    bookings,
+    users,
+    properties,
+    payments
+WHERE
+    bookings.user_id = users.user_id
+    AND bookings.property_id = properties.property_id
+    AND bookings.payment_id = payments.payment_id;
+
+
+-- optimized query retrieving all bookings with related details 
 EXPLAIN ANALYZE
 SELECT b.booking_id,
        b.start_date,
