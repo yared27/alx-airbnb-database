@@ -20,6 +20,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 -- ==============================
 -- PROPERTIES TABLE
 -- ==============================
@@ -55,8 +56,7 @@ CREATE TABLE bookings (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE INDEX bookings_user_index ON bookings(user_id);
-CREATE INDEX bookings_property_index ON bookings(property_id);
+
 
 -- ==============================
 -- PAYMENTS TABLE
@@ -72,7 +72,6 @@ CREATE TABLE payments (
     FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
 );
 
-CREATE INDEX payments_booking_index ON payments(booking_id);
 
 -- ==============================
 -- REVIEWS TABLE
@@ -90,8 +89,6 @@ CREATE TABLE reviews (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE INDEX reviews_property_index ON reviews(property_id);
-CREATE INDEX reviews_user_index ON reviews(user_id);
 
 -- ==============================
 -- MESSAGES TABLE
@@ -108,5 +105,3 @@ CREATE TABLE messages (
     FOREIGN KEY (recipient_id) REFERENCES users(user_id)
 );
 
-CREATE INDEX messages_sender_index ON messages(sender_id);
-CREATE INDEX messages_recipient_index ON messages(recipient_id);
