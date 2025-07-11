@@ -46,3 +46,4 @@ After optimization:
 ## Conclusion
 
 By minimizing selected columns, reviewing join types, and indexing foreign keys, we reduced query execution time significantly and made the query more scalable.
+ 
